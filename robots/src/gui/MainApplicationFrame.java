@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowAdapter;
+
 
 /**
  * Что требуется сделать:
@@ -15,6 +18,7 @@ import java.awt.event.KeyEvent;
  */
 public class MainApplicationFrame extends JFrame {
     private final JDesktopPane desktopPane = new JDesktopPane();
+    private ExitAction exitAction;
 
     public MainApplicationFrame() {
         //Make the big window be indented 50 pixels from each edge
@@ -42,7 +46,8 @@ public class MainApplicationFrame extends JFrame {
         setJMenuBar(generateMenuBar());
         setJMenuBar(createMenuBar());
 
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(EXIT_ON_CLOSE);
+
     }
 
     protected LogWindow createLogWindow() {
@@ -64,7 +69,7 @@ public class MainApplicationFrame extends JFrame {
         JMenuBar menuBar = new JMenuBar();
 
         //Set up the lone menu.
-        JMenu menu = new JMenu("Документ");
+        JMenu menu = new JMenu("Меню");
         menu.setMnemonic(KeyEvent.VK_D);
         menuBar.add(menu);
 
@@ -83,21 +88,26 @@ public class MainApplicationFrame extends JFrame {
         menuItem.setAccelerator(KeyStroke.getKeyStroke(
                 KeyEvent.VK_Q, ActionEvent.ALT_MASK));
         menuItem.setActionCommand("quit");
-        menuItem.addActionListener((event) -> {closeWindow();});
+        menuItem.addActionListener((event) -> {
+            Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));});
         menu.add(menuItem);
 
-        return menuBar;
-    }
-
-    protected void closeWindow(){
-        Object[] options = {"Да", "Нет"};
-        int sel = JOptionPane.showOptionDialog(null, "Вы действительно хотите выйти?",
-                "Выйти?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-        if (sel == JOptionPane.YES_OPTION)
+        addWindowListener(new WindowAdapter()
         {
-            System.exit(0);
-        }
+            public void windowClosing(WindowEvent e)
+            {
+                Object[] options = {"Да", "Нет"};
+                int sel = JOptionPane.showOptionDialog(null, "Вы действительно хотите выйти?",
+                        "Выйти?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                if (sel == JOptionPane.YES_OPTION)
+                {
+                    System.exit(0);
+                }
+            }
+        });
 
+
+        return menuBar;
     }
 
 
