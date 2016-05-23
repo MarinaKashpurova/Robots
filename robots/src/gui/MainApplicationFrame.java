@@ -18,7 +18,6 @@ import java.awt.event.WindowAdapter;
  */
 public class MainApplicationFrame extends JFrame {
     private final JDesktopPane desktopPane = new JDesktopPane();
-    private ExitAction exitAction;
 
     public MainApplicationFrame() {
         //Make the big window be indented 50 pixels from each edge
