@@ -3,6 +3,7 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.TextArea;
+import java.beans.PropertyVetoException;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
@@ -41,10 +42,20 @@ public class LogWindow extends JInternalFrame implements LogChangeListener
         m_logContent.setText(content.toString());
         m_logContent.invalidate();
     }
-    
+
     @Override
     public void onLogChanged()
     {
         EventQueue.invokeLater(this::updateLogContent);
+    }
+
+    public void setState(WindowInfo<LogWindow> state) throws PropertyVetoException {
+
+        if (state.params.get("isMax") == 1) setMaximum(true);
+        else setSize(state.params.get("width"), state.params.get("height"));
+        setLocation(state.params.get("x"), state.params.get("y"));
+        if (state.params.get("inFocus") == 1) setRequestFocusEnabled(true);
+        if (state.params.get("isClosed") == 1) setClosed(true);
+        onLogChanged();
     }
 }
