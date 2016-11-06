@@ -1,12 +1,14 @@
 package GameMath;
 
 
+import java.awt.*;
+
 public class GameMath {
 
-    public static double distance(double x1, double y1, double x2, double y2)
+    public static double distance(Point.Double a, Point.Double b)
     {
-        double diffX = x1 - x2;
-        double diffY = y1 - y2;
+        double diffX = a.getX() - b.getX();
+        double diffY = a.getY() - b.getY();
         return Math.sqrt(diffX * diffX + diffY * diffY);
     }
 
