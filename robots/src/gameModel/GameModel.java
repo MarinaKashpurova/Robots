@@ -26,18 +26,16 @@ public class GameModel extends Observable
 
     public void onModelUpdateEvent()
     {
-        double distance = GameMath.distance(m_target.get_targetPositionX(), m_target.get_targetPositionY(),
-                m_robot.get_robotPositionX(), m_robot.get_robotPositionY());
+        double distance = GameMath.distance(m_target.get_Position(), m_robot.get_Position());
         if (distance < 0.5)
         {
             return;
         }
         double velocity = m_robot.getMaxVelocity();
-        double angleToTarget = GameMath.angleTo( m_robot.get_robotPositionX(),  m_robot.get_robotPositionY(),
-                m_target.get_targetPositionX(), m_target.get_targetPositionY());
-        double angularVelocity = 0;
-        angularVelocity = m_robot.getMaxAngularVelocity();
-        if (angleToTarget > m_robot.get_robotDirection())
+        double angleToTarget = GameMath.angleTo( m_robot.get_PositionX(),  m_robot.get_PositionY(),
+                m_target.get_PositionX(), m_target.get_PositionY());
+        double angularVelocity = m_robot.getMaxAngularVelocity();
+        if (angleToTarget > m_robot.get_Direction())
         {
             m_robot.moveRobot(velocity, angularVelocity, 10);
         }
