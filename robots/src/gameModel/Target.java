@@ -16,26 +16,36 @@ public class Target
     }
 
     public Target(Point.Double point) {
+
         m_targetPositionY = point.getX();
         m_targetPositionY = point.getY();
     }
 
-    public double get_targetPositionX() {
+    public double get_PositionX() {
         return m_targetPositionX;
     }
 
-    public double get_targetPositionY() {
+    public double get_PositionY() {
         return m_targetPositionY;
     }
 
-    public Point.Double get_targetPosition() {
+    public double set_PositionX(double x){
+
+       return m_targetPositionX = x;
+    }
+
+    public double set_PositionY(double y){
+        return m_targetPositionY = y;
+    }
+
+    public Point.Double get_Position() {
 
         return new Point.Double(m_targetPositionX, m_targetPositionY);
     }
 
-    public void setTargetPosition(Point p)
-    {
-        m_targetPositionX = p.x;
-        m_targetPositionY = p.y;
-    }
+    //public void setTargetPosition(Point p)
+    //{
+       // m_targetPositionX = p.x;
+        //m_targetPositionY = p.y;
+    //}
 }
