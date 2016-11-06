@@ -2,6 +2,7 @@ package gameModel;
 
 import GameMath.GameMath;
 
+import java.awt.*;
 import java.util.Observable;
 
 
@@ -22,6 +23,12 @@ public class GameModel extends Observable
 
     public Target get_Target(){
         return m_target;
+    }
+
+    public void setTargetPosition(Point p)
+    {
+        m_target.set_PositionX(p.getX());
+        m_target.set_PositionY(p.getY());
     }
 
     public void onModelUpdateEvent()

@@ -4,7 +4,6 @@ import GameMath.GameMath;
 import gameModel.*;
 import gameModel.Robot;
 
-import java.awt.*;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Graphics;
@@ -47,7 +46,7 @@ public class GameVisualizer extends JPanel
             @Override
             public void mouseClicked(MouseEvent e)
             {
-                gameModel.get_Target().setTargetPosition(e.getPoint());
+                gameModel.setTargetPosition(e.getPoint());
                 repaint();
             }
         });
@@ -80,9 +79,9 @@ public class GameVisualizer extends JPanel
     
     private void drawRobot(Graphics2D g, Robot robot)
     {
-        int robotCenterX = GameMath.round(robot.get_robotPositionX());
-        int robotCenterY = GameMath.round(robot.get_robotPositionY());
-        AffineTransform t = AffineTransform.getRotateInstance(robot.get_robotDirection(), robotCenterX, robotCenterY);
+        int robotCenterX = GameMath.round(robot.get_PositionX());
+        int robotCenterY = GameMath.round(robot.get_PositionY());
+        AffineTransform t = AffineTransform.getRotateInstance(robot.get_Direction(), robotCenterX, robotCenterY);
         g.setTransform(t);
         g.setColor(Color.MAGENTA);
         fillOval(g, robotCenterX, robotCenterY, 30, 10);
@@ -99,9 +98,9 @@ public class GameVisualizer extends JPanel
         AffineTransform t = AffineTransform.getRotateInstance(0, 0, 0); 
         g.setTransform(t);
         g.setColor(Color.GREEN);
-        fillOval(g, target.get_targetPositionX(), target.get_targetPositionY(), 5, 5);
+        fillOval(g, target.get_PositionX(), target.get_PositionY(), 5, 5);
         g.setColor(Color.BLACK);
-        drawOval(g, target.get_targetPositionX(), target.get_targetPositionY(), 5, 5);
+        drawOval(g, target.get_PositionX(), target.get_PositionY(), 5, 5);
     }
 
     public GameModel get_gameModel(){
